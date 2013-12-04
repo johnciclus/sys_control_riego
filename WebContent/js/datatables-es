@@ -1,0 +1,25 @@
+{
+	"sProcessing":     	"Procesando...",
+    "sLengthMenu" :    	"Mostar _MENU_ registros por p&aacute;gina",
+    "sZeroRecords" :   	"No se encontraron registros",
+    "sEmptyTable":      "No se encontraron registros",
+    "sInfo" : 			"Hay _START_ / _END_ de _TOTAL_ registros totales",
+    "sInfoEmpty":      	"&nbsp;&nbsp; ",
+    "sInfoFiltered" : 	"(filtrado de _MAX_ registros totales)",
+    "sInfoPostFix":    	"",
+    "sSearch" : 		"Filtrar",
+    "sUrl":            	"",
+    "sInfoThousands":  	",",
+    "sLoadingRecords": 	"Cargando...",
+    "oPaginate": {
+        "sFirst" : 		"|<<",
+		"sLast":		">>|",
+		"sNext" : 		">",
+		"sPrevious" : 	"<"
+    },
+    "fnInfoCallback": null,
+    "oAria": {
+        "sSortAscending":  ": Ascendente",
+        "sSortDescending": ": Descendente"
+    }
+}

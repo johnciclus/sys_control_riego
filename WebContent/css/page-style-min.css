@@ -1,0 +1,31 @@
+@charset 'utf-8';
+*{}
+body{margin: 0px; font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;}
+.header-art{width:100%;height:150px;background:#fff;}
+.header-art .logo{z-index:5;margin:0 140px;position:relative;width:300px;height:150px;}
+.logo a:link, .logo a:visited, .logo a:hover .logo a:active{text-decoration:none;}
+.logo img{border:0;width:300px;height:150px;display:block;text-decoration:none;-webkit-border-radius:10px 10px 10px 10px;-moz-border-radius:10px 10px 10px 10px;border-radius:10px 10px 10px 10px;behavior:url('ie-style-min.htc');}
+.header-art .menu{display:block;top:-5px;font-size:25px;font-variant:small-caps;position:relative;height:75px;width:740px;background:#fff;margin:-75px 400px;float:left;}
+.menu ul{font-weight:bold;float:left;height:40px;list-style-type:none;z-index:5;}
+.menu li{position:relative;float:left;padding:10px 0px 0px 0px;z-index:3;}
+.menu ul li a, .menu ul li a span{display:block;float:left;overflow:hidden;text-decoration:none;z-index:3;color:#130c04;text-shadow:0 0px 1px #333;}
+.menu ul li{text-shadow:0 0px 1px #333;}
+.menu li ul{background-color:#e4e4e4; opacity:0.8;min-width:150px;height:auto;padding:5px 5px 0px 0px;z-index:-5;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;behavior: url('ie-style-min.htc');}
+.menu .submenu{display:none;position:absolute;top:42px;left:5px;}
+.menu li:hover > a,.menu li a:hover{background:url('css-img/menu-background.gif') bottom repeat-x #92d30f;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;behavior:url('ie-style-min.htc');}
+.menumain .menu-item-middle:hover{background:url('css-img/menu-background.gif') bottom repeat-x #92d30f;color:#fff;padding:5px 2px 5px 2px;cursor:pointer;-webkit-border-radius:5px;-moz-border-radius:5px ;border-radius:5px;behavior:url('ie-style-min.htc');}*/
+.menu li a:hover .menu-item-middle, .menu li:hover a .menu-item-middle{background-position:0 -32px;color:#fff;}
+.submenu li a:hover .submenu-item-right, .submenu li:hover a .submenu-item-right, .submenu li a:hover .submenu-item-middle, .submenu li:hover a .submenu-item-middle, .submenu li a:hover .submenu-item-left, .submenu li:hover a .submenu-item-left{background-position:0 -32px;color:#fff;}
+.menu li:hover .submenu{display:block;background-position:0 -32px;color:#fff;}
+.menu li:hover li, .menu li:active li{width:100%;padding:1px 0 2px;border-bottom:2px #c1d9f0 dashed;background:none !important;}
+.menu li:hover li a, .menu li.active li a{color:#000;line-height:normal;padding:3px;text-indent:1px;}
+.menu li:hover li a:hover, .menu li:active li a:hover{color:#000;line-height:normal;text-decoration:none;}
+.content-art{position:relative;width:100%;background-color:#fff;}
+.workspace-art{position:relative;width:1000px;min-height:450px;background:#fff;margin:0 140px;}
+.footer-art{position:relative;height:30px;background-color:#d9f691;padding:5px;z-index:10;}
+.p-art{margin:0px 5px 5px 5px;text-align:center;font-size:14px;color:#000;margin:0 auto;}
+.footer-art a:link, .footer-art a:visited{color:#130c04;text-decoration:none;}
+.footer-art a:hover{color:#130c04;text-decoration:underline overline;}
+.disable { color: #aaa; cursor: pointer;}
+/*border:1px solid #000;*/
+/*#92d30f*/
