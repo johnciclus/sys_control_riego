@@ -1,0 +1,70 @@
+Instalación del servidor
+
+Nombre del usuario: 	usta
+Nombre del servidor:	limonal
+contraseña:		limonal01
+contraseñaBD:		piolin
+
+1. 	Instalar servidor Linux Ubuntu 12.04 32-bit
+
+2.	Instalar gnome-panel
+
+	sudo apt-get install gnome-panel
+
+3. 	Instalar VIM
+
+	sudo apt-get install vim
+
+4. 	Instalar openssh
+
+	sudo apt-get install openssh-server
+
+
+sudo apt-get install openjdk
+
+
+5. 	Instalar tomcat7 y herramientas de administración
+
+	sudo apt-get install tomcat7 tomcat7-admin
+
+6. 	Borrar directorio ROOT de tomcat7
+
+	sudo rm -r /var/lib/tomcat7/webapps/ROOT
+
+7.	Subir proyecto SysControlRiego
+	
+	crear directorio: 	/www
+	copiar proyecto a:	/www/SysControlRiego/
+
+8. 	Desplegar proyecto SysControlRiego
+
+	Aceder a: http://localhost:8080/manager/html/
+
+	trayectoria: 	/
+	URL de conf: 	/www/SysControlRiego/WebContent/WEB-INF/web.xml
+	Directorio:	/www/SysControlRiego/WebContent/
+
+	Click en Desplegar
+
+9.	Instalar base de datos MySQL
+
+	sudo apt-get install mysql-server mysql-client
+
+10.	Cargar Backup de Base de Datos
+	
+	Accedemos al teminal de Mysql:
+
+	mysql -u root -p
+	
+	Creamos y usamos la base de datos correspondiente:
+
+	create database basesystemteleco;
+	use basesystemteleco;	
+
+	Cargamos el archivo del Dump:
+
+	source ~/SysControlRiegoBD.sql
+
+	
+
+
