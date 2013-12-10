@@ -1,0 +1,21 @@
+
+* Verificación de reconocimiento de driver para el dispositivo
+
+dmesg | grep FTDI
+
+* Verificar si existe dispositivo en
+
+/dev/ttyUSB0
+
+*Installar screen
+
+sudo apt-get install screen
+
+*Ejecutar listener
+
+sudo screen /dev/ttyUSB0
+
+sudo chown john ttyUSB0
+
+*Establecer el puerto de conexión como COMUSB0
+//com = new Com(paramCOM("COMUSB0"));

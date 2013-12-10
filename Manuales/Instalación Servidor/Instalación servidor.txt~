@@ -1,0 +1,160 @@
+Instalación del servidor
+
+Nombre del usuario: 	usta
+Nombre del servidor:	limonal
+contraseña:		limonal01
+contraseñaBD:		piolin
+
+1. 	Instalar servidor Linux Ubuntu 12.04 32-bit
+
+2.	Instalar Gnome-Panel:
+	sudo apt-get install gnome-panel
+
+3. 	Instalar Vim:
+	sudo apt-get install vim
+
+4. 	Instalar OpenSsh:
+	sudo apt-get install openssh-server
+
+5.	Instalar JAVA JDK:
+	sudo apt-get install openjdk-7-jdk
+		
+	javac -version
+
+6.	Configurar variables de entorno:
+	*Editar el archivo profile
+	vim /etc/profile
+
+	*Agregar las siguientes líneas al final del archivo bashrc
+	vim ~/.bashrc	
+	export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+	export PATH=$PATH:$JAVA_HOME/bin
+	export JRE_HOME=$JAVA_HOME/jre
+	export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+
+9. 	Instalar tomcat7 y herramientas de administración
+	sudo apt-get install tomcat7 tomcat7-admin	
+	
+	*Agregar las siguientes líneas al final del archivo bashrc
+	vim ~/.bashrc
+	
+	export CATALINA_HOME=/usr/share/tomcat7
+
+	*Editar archivo de usuarios tomcat
+	cd /etc/tomcat7
+	vim tomcat-users.xml
+	
+	*Agregar
+
+	<role rolename="manager-gui"/>
+	<user username="usta" password="limonal01" roles="manager-gui"/>
+	
+	*Agregar usuario al grupo Tomcat7
+	sudo adduser usta tomcat7
+
+	*Ejecutar
+	sudo $CATALINA_HOME/bin/startup.sh
+
+	*Reiniciar Tomcat
+	/etc/init.d/tomcat7 restart
+
+
+6.	Instalar MySQL:
+	sudo apt-get install mysql-server mysql-common mysql-client
+	
+	*Verificar servicio Mysql
+	sudo netstat -tap | grep mysql
+	
+	*Agregar usuario al grupo Mysql
+	sudo adduser usta mysql
+
+	*Reiniciar
+	sudo service mysql restart
+	
+	*Editar archivo my.cnf
+	vim /etc/mysql/my.cnf
+	bind-address = XXX.XXX.XXX.XXX
+	
+
+
+
+
+
+
+9. 	Borrar directorio ROOT de tomcat7
+	sudo rm -r /var/lib/tomcat7/webapps/ROOT
+
+10.	Subir proyecto SysControlRiego	
+	crear directorio: 	mkdir /www
+	copiar proyecto a:	cp -r origen /www
+
+11. 	Desplegar proyecto SysControlRiego
+	
+	*Editar el archivo tomcat-users.xml 
+	vim /etc/tomcat7/tomcat-users.xml
+
+	*Agregar las siguientes líneas
+	<role rolename="manager-gui"></role>
+	<user username="user" password="password" roles="manager-gui"></user>
+
+	Aceder a: http://localhost:8080/manager/html/
+
+	trayectoria: 	/
+	URL de conf: 	/www/SysControlRiego/WebContent/WEB-INF/web.xml
+	Directorio:	/www/SysControlRiego/WebContent/
+
+	Click en Desplegar
+
+12.	Cargar Backup de Base de Datos
+	
+	Accedemos al teminal de Mysql:
+
+	mysql -u root -p
+	
+	Creamos y usamos la base de datos correspondiente:
+
+	create database basesystemteleco;
+	use basesystemteleco;	
+
+	Cargamos el archivo del Dump:
+
+	source ~/SysControlRiegoBD.sql
+
+	
+13.	Configurar Driver Mysql para JDBC.
+
+	sudo service mysql restart
+
+	sudo apt-get install libmysql-java
+
+	mysql-connector-java-5.1.16.jar $CATALINA_HOME/lib
+
+	sudo service mysql restart
+
+	sudo /etc/init.d/tomcat7 start
+
+
+
+
+
+
+
+
+
+	sudo apt-get install mysql-server
+	sudo apt-get install mysql-client
+	sudo apt-get install libmysql-java
+
+
+	mysql -u root -p
+
+	create database [database_name];	
+
+	grant all privileges on [database_name].* to [user]@localhost identified by "[password]";
+	flush privileges;
+	
+
+	*Probar la conexión
+	mysql -u [user] -h 127.0.0.1 -p
+	
+	export CLASSPATH=/usr/share/java/mysql-connector-java-5.1.27-bin.jar:$CLASSPATH
