@@ -1,0 +1,107 @@
+Instalación del servidor
+
+Nombre del usuario: 	usta
+Nombre del servidor:	limonal
+contraseña:		limonal01
+contraseñaBD:		piolin
+
+1.	Instalar MySQL
+	sudo apt-get install mysql-server mysql-common mysql-client
+	
+	*Iniciar, reiniciar o detener el servicio mysql:
+	/etc/init.d/mysql start
+	/etc/init.d/mysql restart
+	/etc/init.d/mysql stop
+
+	*Configurar arranque automático
+	update-rc.d mysql defaults
+
+	*Cambiar contraseña de root
+	mysql -h localhost -u root -p
+	use mysql;
+	update user set password=PASSWORD('password') where user='root';
+	flush privileges;
+
+2.	Instalar JAVA JDK
+	sudo apt-get install openjdk-7-jdk
+	javac -version
+
+3.	Configurar variables de entorno
+	*Agregar las siguientes líneas al final del archivo profile
+	vim /etc/profile
+
+	*Agregar las siguientes líneas al final del archivo bashrc
+	vim ~/.bashrc	
+	export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+	export PATH=$PATH:$JAVA_HOME/bin
+	export JRE_HOME=$JAVA_HOME/jre
+	export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+
+4. 	Instalar tomcat7 y herramientas de administración
+	sudo apt-get install tomcat7 tomcat7-admin	
+
+	*Agregar las siguientes líneas al final del archivo profile
+	vim /etc/profile
+
+	*Agregar las siguientes líneas al final del archivo bashrc
+	vim ~/.bashrc
+	export CATALINA_HOME=/usr/share/tomcat7
+	export BASEDIR=$CATALINA_HOME
+
+	*Modificar los permisos a la carpeta tomcat7
+	chmod 777 -R /usr/share/tomcat7
+
+	*Agregar las siguientes líneas en el archivo tomcat-users.xml
+	vim /etc/tomcat7/tomcat-users.xml
+	<role rolename="manager-gui"></role>
+	<user username="user" password="password" roles="manager-gui"></user>		
+
+	*Iniciar, reiniciar o detener el servicio tomcat
+	/etc/init.d/tomcat7 start
+	/etc/init.d/tomcat7 restart
+	/etc/init.d/tomcat7 stop
+
+5.	Cargar Backup de Base de Datos
+	
+	*Accedemos a Mysql
+	mysql -u root -p
+	
+	*Creamos y usamos la base de datos correspondiente
+	create database basesystemteleco;
+	use basesystemteleco;	
+
+	*Cargamos el archivo del Dump:
+	source ~/SysControlRiegoBD.sql
+
+6.	Configurar Driver Mysql para JDBC
+
+	*Copiar el archivo mysql-connector-java-5.1.27-bin
+	cp origen/mysql-connector-java-5.1.27-bin.jar /usr/share/tomcat7/lib
+	cp origen/mysql-connector-java-5.1.27-bin.jar /var/lib/tomcat7/webapps/proyecto/WEB-INF/lib
+	
+	*Crear el archivo context.xml
+	vim /var/lib/tomcat7/webapps/proyecto/META-INF/context.xml
+
+	*Agregar las siguientes líneas en el archivo context.xml modificando el nombre de la base de datos, usuario y contraseña
+	<Context>
+ 	 <Resource name="jdbc/MYDATABASE" auth="Container" type="javax.sql.DataSource" maxActive="50" maxIdle="30" maxWait="10000" username="MYSQLUSER" password="MYSQLPASSWORD" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/MYDATABASE"/>
+	</Context>
+
+	*Agregar las siguientes líneas en el archivo WEB.xml modificando el nombre de la base de datos
+	vim /var/lib/tomcat7/webapps/proyecto/WEB-INF/web.xml
+	
+	<resource-ref>
+ 		<description>MySQL Datasource</description>
+ 		<res-ref-name>jdbc/MYDATABASE</res-ref-name>
+ 		<res-type>javax.sql.DataSource</res-type>
+ 		<res-auth>Container</res-auth>
+  	</resource-ref>
+
+7. 	Desplegar proyecto SysControlRiego mediante archivo war
+
+	*Aceder
+	http://localhost:8080/manager/html/
+
+	*Buscar: Archivo WAR a desplegar
+	Examinar
+	Desplegar
