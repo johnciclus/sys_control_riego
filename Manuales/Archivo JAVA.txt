@@ -1,0 +1,23 @@
+*Compilar un archivo .java
+
+	-Instalar openjdk
+    	sudo apt-get install openjdk-7-jdk
+
+	-Compilar el archivo .java
+	javac nombre.java
+	
+	-Ejecuar el archivo .class generado
+    	java nombre.class
+
+*Generar un archivo .jar
+	-Desde el directorio raíz 
+ 	jar cvf nombre.jar *
+
+	-Observar el contenido del archivo .jar 
+	jar tvf nombre.jar 
+
+	-Extraer contenido archivo .jar
+	jar xvf nombre.jar
+
+*Ejecutar un archivo .jar
+	java -jar nombre.jar
