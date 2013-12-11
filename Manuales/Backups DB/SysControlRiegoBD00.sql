@@ -3,7 +3,8 @@ SQLyog Enterprise - MySQL GUI v6.03
 Host - 5.0.67-community-nt : Database - basesystemteleco
 *********************************************************************
 Server version : 5.0.67-community-nt
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
