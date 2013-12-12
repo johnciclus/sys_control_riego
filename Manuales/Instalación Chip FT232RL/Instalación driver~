@@ -1,3 +1,4 @@
+
 * Verificación de reconocimiento de driver para el dispositivo
 
 dmesg | grep FTDI

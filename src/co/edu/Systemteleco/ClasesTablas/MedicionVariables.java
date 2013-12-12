@@ -17,6 +17,7 @@ public class MedicionVariables {
 	private Time HoraRegistro;
 	private  int varhum;
 	private String nomzigbee;
+	private String tipo;
 	private int codcult;
 	
 	private Conexion conexion;
@@ -28,6 +29,7 @@ public class MedicionVariables {
 		this.varhum=0;
 		this.codcult=0;
 		this.nomzigbee="";
+		this.tipo = "";
 	}
 
 	public int getIdregvar() {
@@ -84,6 +86,14 @@ public class MedicionVariables {
 
 	public void setNomzigbee(String nomzigbee) {
 		this.nomzigbee = nomzigbee;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String nomzigbee) {
+		this.tipo = tipo;
 	}
 
 	public int getCodcult() {
@@ -192,13 +202,15 @@ public class MedicionVariables {
 		try{
 			conexion = new Conexion();
 			Connection con = conexion.conectar("cantidadFertilizante");
-						 
-			 ps = con.prepareStatement("SELECT medicion_variables.idregvar, registro_zigbee.nomzigbee, medicion_variables.varhum, medicion_variables.fechamedicion, medicion_variables.HoraRegistro " + 
+				
+			//medicion_variables.idregvar, registro_zigbee.nomzigbee, medicion_variables.varhum, medicion_variables.fechamedicion, medicion_variables.HoraRegistro
+			//medicion_variables.maczigbee in (select registro_zigbee.maczigbee from registro_zigbee where codcult= "+codigo+") " + "AND
+			 ps = con.prepareStatement("SELECT medicion_variables.idregvar, registro_zigbee.nomzigbee, registro_zigbee.tipo, medicion_variables.varhum, medicion_variables.fechamedicion, medicion_variables.HoraRegistro " + 
 				 "FROM registro_zigbee, medicion_variables " + 
-				 "WHERE medicion_variables.maczigbee in (select registro_zigbee.maczigbee from registro_zigbee where codcult= "+codigo+") " +
+				 
+				 "WHERE registro_zigbee.maczigbee=medicion_variables.maczigbee " +
 				 "AND medicion_variables.fechamedicion >= '"+fechaini+"' AND medicion_variables.fechamedicion <= '"+fechafin+"' " +
-				 "AND medicion_variables.HoraRegistro >= '"+horaini+"' AND medicion_variables.HoraRegistro <= '"+horafin+"' " +
-				 "AND  registro_zigbee.maczigbee=medicion_variables.maczigbee " + 
+				 "AND medicion_variables.HoraRegistro >= '"+horaini+"' AND medicion_variables.HoraRegistro <= '"+horafin+"' " +				 
 				 "ORDER  BY  medicion_variables.idregvar;");
 
 				rst = ps.executeQuery();
@@ -208,9 +220,10 @@ public class MedicionVariables {
 					MedicionVariables reportehumeda = new MedicionVariables();
 									
 					reportehumeda.setNomzigbee(rst.getString(2));
-					reportehumeda.setVarhum(rst.getInt(3));
-					reportehumeda.setFechamedicion(rst.getDate(4));
-					reportehumeda.setHoraRegistro(rst.getTime(5));
+					reportehumeda.setTipo(rst.getString(3));
+					reportehumeda.setVarhum(rst.getInt(4));
+					reportehumeda.setFechamedicion(rst.getDate(5));
+					reportehumeda.setHoraRegistro(rst.getTime(6));
 					
 					
 					Reporte.add(reportehumeda);
